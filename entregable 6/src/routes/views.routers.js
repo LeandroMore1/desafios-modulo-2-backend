@@ -15,8 +15,8 @@ router.get("/realtimeproducts",(req,res)=>{
 })
 
 router.get('/products', async (req,res)=>{
-    const products = await productService.getProducts()
     try{
+        const products = await productService.getProducts()
         res.render('products',{products})
     } catch(err){
         res.send(err)

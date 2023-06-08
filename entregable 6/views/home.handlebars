@@ -2,30 +2,36 @@
     Productos:
 </h1>
 <div id="productsList">
-        {{#each products}}
+    {{#each products}}
 
-            <div class="secondaryDiv">
-            <h2>producto:</h2> 
-            <p>{{title}}</p>
-            </div>
-            <div class="secondaryDiv">
-            <h2>precio:</h2>
-            <p>{{price}}</p>
-            </div>
-            <div class="secondaryDiv">
-            <h2>descripcion:</h2>
-            <p>{{description}}</p>
-            </div>
-            <div class="secondaryDiv">
-            <h2>stock disponible:</h2>
-            <p>{{stock}}</p>
-            </div>
-            <div class="secondaryDiv">
-            <h2>id:</h2>
-            <p>{{_id}}</p>
-            </div>
-            </div>
+    <div class="secondaryDiv">
+        <h2>producto:</h2>
+        <p>{{this.title}}</p>
+    </div>
 
-{{/each}}
+    <div class="secondaryDiv">
+        <h2>precio:</h2>
+        <p>{{this.price}}</p>
+    </div>
+
+    <div class="secondaryDiv">
+        <h2>descripcion:</h2>
+        <p>{{this.description}}</p>
+    </div>
+
+    <div class="secondaryDiv">
+        <h2>stock disponible:</h2>
+        <p>{{this.stock}}</p>
+    </div>
+
+    <div class="secondaryDiv">
+        <h2>id:</h2>
+        <p>{{this._id}}</p>
+    </div>
+    {{/each}}
+
+</div>
+
+
 <script src="/socket.io/socket.io.js"></script>
 <script src="/js/main.js"></script>
