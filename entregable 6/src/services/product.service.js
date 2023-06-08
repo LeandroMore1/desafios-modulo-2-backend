@@ -6,7 +6,7 @@ class ProductService {
     }
 
     async getProducts(){
-        return await this.model.find()
+        return await this.model.find().lean()
     }
 
     async addProduct(product){
@@ -24,14 +24,4 @@ class ProductService {
 
 export const productService = new ProductService()
 
-const find = async () =>{
-    try{
-        const find = await productService.getProducts()
-        return console.log(await find)
-    } catch(err){
-
-    }
-
-    
-}
 

@@ -2,12 +2,11 @@ import express from "express"
 import handlebars from "express-handlebars"
 import viewsRouter from "./routes/views.routers.js"
 import { Server } from "socket.io"
-
 import { productService } from "./services/product.service.js"
 import mongoose from "mongoose"
 
-mongoose.connect("mongodb+srv://manumore42:fiona100@cluster0.gfxayke.mongodb.net/?retryWrites=true&w=majority")
 
+await mongoose.connect("mongodb+srv://manumore42:fiona100@cluster0.gfxayke.mongodb.net/?retryWrites=true&w=majority")
 
 const productsList = await productService.getProducts()
 const app = express()
@@ -20,7 +19,10 @@ app.use(express.urlencoded({ extended: true }));
 app.engine('handlebars',handlebars.engine())
 app.set('views', "views/")
 app.set('view engine' , 'handlebars')
+
+
 app.use('/',viewsRouter)
+
 
 app.use(express.static('public'));
 
