@@ -1,4 +1,26 @@
+
+
+let products = JSON.parse(localStorage.getItem('products')) || []
+console.log(products)
+
+
+
+function addProduct(prodId){
+    
+    let prodIndex = products.findIndex(el => el._id === prodId)
+    if(prodIndex !== -1){
+    products[prodIndex].quantity++
+
+    } else{
+        products.push({_id: prodId, quantity: 1})
+    }
+    localStorage.setItem('products', JSON.stringify(products))
+    return console.log(products)
+}
+
 const socket = io()
+
+
 
 function render(data) {
 
@@ -54,6 +76,7 @@ function render(data) {
         const id = parseInt(document.getElementById('productToDeleteId').value)
         socket.emit('deleteProd', id)
     }
+
 
 socket.emit('message', "me conecte al sv!")
 

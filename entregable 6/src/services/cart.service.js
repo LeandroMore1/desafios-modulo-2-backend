@@ -6,8 +6,33 @@ class CartService {
         this.model = cartModel
     }
 
+    // async addToCart(productId){
+    //     const lastCart = await this.model.findOne().sort({ _id: -1 })
+    //     if(lastCart){
+    //         const product = await productService.findProductById(productId)
+    //         lastCart.products.push({product: product, quantity: ++1})
+    //     }
+    // }
+
     async addCart(){
-        return await this.model.create()
+        const lastCart = await this.model.findOne().sort({ _id: -1 }).lean()
+        if(!lastCart){
+            // const newCart = await this.model.create();
+            // const cartId = newCart._id; 
+            // return cartId;
+            const newCart = new this.model();
+            const savedCart = await newCart.save();
+            const cartId = savedCart._id; 
+            return cartId
+        } else {
+            const lastCartId = lastCart._id
+            return lastCartId
+        }
+    }
+
+    async getActualCart(){
+        const lastCart = await this.model.findOne().sort({ _id: -1 })
+        return  lastCart.id
     }
 
     async addProductToCart(cartId,productId){

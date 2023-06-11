@@ -1,21 +1,27 @@
-#productCard{
+#productCard , #product{
     background: #36393f;
     opacity: 1;
-    width: 400px;
+    width: 300px;
     display: flex;
     flex-direction: column;
     border-radius: 10px;
     border-color: black;
     border:5px;
     margin-right: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
 }
 
+
+
+.numPag{
+    color: black;
+    font-weight: 400;
+}
 
 #formContainer{
     display: flex;
     align-items: top;
-    
+
 }
 
 #addContainer{
@@ -26,26 +32,55 @@
     margin-left: 50px;
 }
 
-#productsList{
+#productsList , #products{
     display: flex;
     flex-wrap: wrap;
-    
+    justify-content: space-evenly;
+    margin-top: 20px;
 }
 
 body{
     font-family: "roboto flex";
 }
 
+.header{
+    margin-top: 20px;
+}
+
+.cartButton{
+    margin-right: 30px;
+    height: 40px;
+}
+
+.titleProducts{
+    margin-left: 30px;
+}
+
+.title{
+    margin-top: 15px;
+}
+
 h2, p{
+    font-size: 14px;
+    color: white;
+}
+
+p{
+    /* font-size: 22px; */
     color: white;
 }
 
 
-.secondaryDiv{
+.secondaryDiv, .cont{
     display: flex;
     align-items: center;
     margin-left: 20px;
+    margin-bottom: 5px;
 
+}
+
+.button{
+    margin-bottom: 15px;
 }
 
 .form{
