@@ -11,7 +11,35 @@
     margin-bottom: 40px;
 }
 
+#warningMsg{
+    color: red;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
 
+.inputModifyQty{
+    width: 30px;
+}
+
+.buttonEmptyCart{
+    margin-top: 25px;
+}
+
+
+.table{
+    width: 700px;
+}
+
+tbody,thead{
+    text-align: center;
+}
+
+.cartTitle{
+    font-size: 35px;
+    margin-top: 50px;
+    margin-bottom: 40px;
+}
 
 .numPag{
     color: black;
@@ -65,9 +93,10 @@ h2, p{
     color: white;
 }
 
-p{
-    /* font-size: 22px; */
-    color: white;
+#emptyMessage p{
+    color: black;
+    font-size: 20px;
+    text-align: center;
 }
 
 
