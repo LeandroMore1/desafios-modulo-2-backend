@@ -32,6 +32,7 @@ class ProductService {
         return  this.model.paginate(filter, {lean: true, limit, page})
     }
 
+
     async addProduct(product){
         return await this.model.create(product)
     }

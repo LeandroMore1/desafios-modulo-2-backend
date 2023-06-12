@@ -1,22 +1,38 @@
 
 
-let products = JSON.parse(localStorage.getItem('products')) || []
-console.log(products)
+// let products = JSON.parse(localStorage.getItem('products')) || []
 
 
-
-function addProduct(prodId){
+// function addProduct(prodId){
     
-    let prodIndex = products.findIndex(el => el._id === prodId)
-    if(prodIndex !== -1){
-    products[prodIndex].quantity++
+//     let prodIndex = products.findIndex(el => el._id === prodId)
+//     if(prodIndex === -1){
+//         products.push({_id: prodId})
 
-    } else{
-        products.push({_id: prodId, quantity: 1})
-    }
-    localStorage.setItem('products', JSON.stringify(products))
-    return console.log(products)
+//     } 
+//     localStorage.setItem('products', JSON.stringify(products))
+//     return console.log(products)
+// }
+const createCart = async () => {
+  const response = await fetch(`http://localhost:8080/api/carts`, {
+    method: "POST",
+  });
+  const cart = await response.json();
+  return json
 }
+
+async function addProduct(endpoint,prodId) {
+   
+    const options = {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({prodId: prodId})
+    }
+  
+    return await fetch(`http://localhost:4040/api/carts/${endpoint}`, options)
+  }
 
 const socket = io()
 

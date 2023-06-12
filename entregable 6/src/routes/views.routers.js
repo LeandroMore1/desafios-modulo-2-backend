@@ -22,8 +22,6 @@ router.get('/products', async (req,res)=>{
         products.stock = stock
         products.category = category
         products.cartId = findCartId.toHexString()
-        console.log(products)
-
         // NOTE products.prevLink = products.prevPage != null? `?limit=${limit}&page=${prevPage}&stock=${stock}&category=${category}` : null
         // aca intente hacer que prevLink tenga el link de la pagina en un string pero cuando lo intentaba implementar el render no me devolvia los productos
 
