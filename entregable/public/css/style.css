@@ -11,6 +11,52 @@
     margin-bottom: 40px;
 }
 
+.profileTitle{
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+.profileImg{
+    margin-bottom: 20px;
+
+}
+
+.profileText{
+    color: black;
+}
+
+.loginTitle{
+    margin-top: 20px;
+    text-align: center;
+}
+
+#registerTitle{
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.form-group{
+    margin-bottom: -10px;
+}
+
+#loginForm{
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+#navBar{
+    height: 60px;
+    color: black;
+}
+
+.registerText{
+    color: black;
+    margin-top: 20px;
+    margin-bottom: 15px;
+}
+
 #warningMsg{
     color: red;
     margin-top: 20px;

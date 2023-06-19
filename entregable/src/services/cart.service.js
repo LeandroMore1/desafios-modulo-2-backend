@@ -53,11 +53,6 @@ class CartService {
 
     async updateQuantity(cartId, prodId, qty, actualValue){
 
-    // const product = await this.model.find(
-    // { _id: cartId},
-    // { products: {$elemMatch: {product: prodId}}})
-
-    // return product
     await this.model.updateOne(
         { "_id": cartId, "products.product": prodId },
         { $set: { "products.$.quantity": qty >= 0 ? qty : actualValue} })
