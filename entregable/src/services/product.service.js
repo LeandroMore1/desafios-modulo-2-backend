@@ -11,7 +11,7 @@ class ProductService {
 
     async getProductsByPagination(limit = 10, page = 1, stock= false, category= false){ // <--- aca intente agregarle un parametro sort = {}
         let filter = {}
-        const sort = { price: 1 }
+        
 
         if(stock){
             filter = { ...filter, stock }
@@ -29,7 +29,7 @@ class ProductService {
 
         // return  this.model.paginate(filter, {lean: true, limit, page, sort: { price: 1}}) ----> tambien intenté de esta manera, pero tampoco arroja 
         //                                                                                         los productos por precio
-        return  this.model.paginate(filter, {lean: true, limit, page, sort})
+        return  this.model.paginate(filter, {lean: true, limit, page})
     }
 
 

@@ -2,7 +2,9 @@ import express from "express"
 import handlebars from "express-handlebars"
 import cookieParser from "cookie-parser";
 import session from 'express-session';
-import  FileStore  from 'session-file-store';
+import sessionsRouter from "./routes/sessions.router.js";
+import inicializePassport from "./config/passport.config.js";
+import passport from "passport";
 import userRouter from "./routes/user.router.js";
 import MongoStore from 'connect-mongo'
 import viewsRouter from "./routes/views.routers.js"
@@ -30,6 +32,9 @@ app.use(
     })
 )
 
+inicializePassport()
+app.use(passport.initialize())
+app.use(passport.session())
 
 await mongoose.connect("mongodb+srv://manumore42:fiona100@cluster0.gfxayke.mongodb.net/?retryWrites=true&w=majority")
 
@@ -59,9 +64,12 @@ app.use((req, res, next) => {
     }
     next();
   });
+
+
 app.use('/',viewsRouter)
 app.use('/api/carts', cartRouter)
 app.use('/api/users', userRouter)
+app.use('/api/sessions', sessionsRouter)
 
 app.use(express.static('public'));
 

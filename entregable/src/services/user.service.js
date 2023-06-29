@@ -1,5 +1,7 @@
 import userModel from "../models/user.model.js";
 
+
+
 class UserService {
     constructor(){
         this.model = userModel
@@ -9,9 +11,9 @@ class UserService {
         return await this.model.find()
     }
 
-    async validateAdmin(mail){
-        const user = await this.model.findOne( {mail: mail})
-        if(user.mail === "adminCoder@coder.com" && user.password === "adminCod3r123"){
+    async validateAdmin(mail,password){
+        const user = await this.model.findOne( {email: mail})
+        if(user.email === "adminCoder@coder.com" && user.password === password){
             user.role = "admin"
         } else {
             user.role = "user"
@@ -21,10 +23,14 @@ class UserService {
 
     async createUser(user){
         return await this.model.create(user)
+    }   
+
+    async getUserById(id){
+        return await this.model.findById(id)
     }
 
     async getUserByEmail(mail){
-        return await this.model.findOne( {mail: mail})
+        return await this.model.findOne( {email: mail})
     }
 
 }
