@@ -7,7 +7,7 @@ const sessionsRouter = Router()
 
 sessionsRouter.get(
 	'/github',
-	passport.authenticate('github', { scope: ['user: email'] }),
+	passport.authenticate('github', { scope: ['user:email'] }),
 	async (req, res) => {}
 );
 
