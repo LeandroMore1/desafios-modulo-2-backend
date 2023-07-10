@@ -12,7 +12,7 @@ const inicializePassport = () => {
     new LocalStrategy(
         {usernameField: 'email', passReqToCallback: true },
         async (req, username,password,done) => {
-            const {name , lastName, img} = req.body
+            const {name , lastName, img, age} = req.body
 
             try{
                 const user = await userService.getUserByEmail(username)
@@ -25,6 +25,7 @@ const inicializePassport = () => {
                     name,
                     lastName,
                     email: username,
+                    age,
                     password: hashedPass,
                     img,
                 })
@@ -45,7 +46,7 @@ const inicializePassport = () => {
             },
             async (accessToken, refreshToken, profile, done) =>{
                 try{
-                    console.log(profile)
+                    
                     let user = await userService.getUserByEmail(profile._json.email)
                     if(!user){
                         const newUser = {

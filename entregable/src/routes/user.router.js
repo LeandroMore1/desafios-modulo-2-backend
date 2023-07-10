@@ -1,20 +1,12 @@
 import { Router } from "express";
-// import { userService } from "../services/user.service.js";
-// import { hashPassword, comparePassword } from '../utils/encrypt.util.js';
 import passport from "passport";
+import { cartService } from "../services/cart.service.js";
+import { userService } from "../services/user.service.js";
 
 const userRouter = Router()
 
 userRouter.post("/",passport.authenticate('register',{failureRedirect: '/registererror'}),async(req,res)=>{
     res.redirect('/login');
-    // const user = { ...req.body, password: hashPassword(req.body.password) }
-    // try{
-    //     const newUser = await userService.createUser(user)
-    //     delete newUser.password
-    //     res.redirect("/login")
-    // } catch (err){
-    //     res.status(400).json({error: err.message} )
-    // }
 })
 
 userRouter.post('/logout', async (req, res )=>{
@@ -31,36 +23,20 @@ userRouter.post("/auth", passport.authenticate('login' , {failureRedirect: '/log
     if (!req.user) return res.status(400).send('No user found')
 
         const user = req.user;
+        const userId = user._id
+        const cartId = await cartService.addCart()
 
 		delete user.password;
 
 		req.session.user = user;
+
+        await userService.assignCartToUser(cartId,userId)
 
         if(user.role === "admin"){
             req.session.admin = true
         }
         
         res.redirect("/products")
-    // const {mail,password} = req.body
-    // try{
-
-    //     const user = await userService.getUserByEmail(mail)
-
-    //     if(!user) throw new Error('invalid data')
-    //     if (!comparePassword(user, password)) throw new Error('Invalid data')
-
-    //     await userService.validateAdmin(user.mail,user.password)
-        
-    //     req.session.user = user
-
-    //     if(user.role === "admin"){
-    //         req.session.admin = true
-    //     }
-    //     res.redirect("/products")
-    // }
-    // catch(err){
-    //     res.status(400).json({error: err.message})
-    // }
 })
 
 export default userRouter

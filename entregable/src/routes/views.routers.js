@@ -1,6 +1,7 @@
 import { Router } from "express"
 import { productService } from "../services/product.service.js"
 import { cartService } from "../services/cart.service.js"
+import { userService } from "../services/user.service.js";
 import { isAuth, isGuest } from "../middlewares/auth.middleware.js";
 
 
@@ -44,17 +45,16 @@ router.get("/realtimeproducts",(req,res)=>{
 
 
 router.get('/products', async (req,res)=>{
+
     const {limit, page, stock, category} = req.query
     const findCartId = await cartService.addCart()
 
+    
     try{
         const products = await productService.getProductsByPagination(limit, page, stock, category)
         products.stock = stock
         products.category = category
         products.cartId = findCartId.toHexString()
-        // NOTE products.prevLink = products.prevPage != null? `?limit=${limit}&page=${prevPage}&stock=${stock}&category=${category}` : null
-        // aca intente hacer que prevLink tenga el link de la pagina en un string pero cuando lo intentaba implementar el render no me devolvia los productos
-        
         res.render('products',products)
     } catch(err){
         res.send(err)

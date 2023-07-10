@@ -11,6 +11,12 @@ class UserService {
         return await this.model.find()
     }
 
+    async assignCartToUser(cartId,userId){
+        const findUser = await this.model.findById(userId)
+        findUser.cart = cartId
+        return await findUser.save()
+    }
+
     async validateAdmin(mail,password){
         const user = await this.model.findOne( {email: mail})
         if(user.email === "adminCoder@coder.com" && user.password === password){
