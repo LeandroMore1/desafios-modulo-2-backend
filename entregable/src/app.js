@@ -1,5 +1,6 @@
 import express from "express"
 import handlebars from "express-handlebars"
+
 import cookieParser from "cookie-parser";
 import session from 'express-session';
 import sessionsRouter from "./routes/sessions.router.js";
@@ -13,7 +14,9 @@ import { Server } from "socket.io"
 import { productService } from "./services/product.service.js"
 import mongoose from "mongoose"
 
+
 const app = express()
+const privateKey = "privateKey"
 
 app.use(
     session({
@@ -31,7 +34,7 @@ app.use(
         saveUninitialized: true
     })
 )
-
+app.use(cookieParser('secret'));
 inicializePassport()
 app.use(passport.initialize())
 app.use(passport.session())
@@ -57,13 +60,6 @@ app.engine('handlebars',handlebars.engine())
 app.set('views', "views/")
 app.set('view engine' , 'handlebars')
 
-app.use((req, res, next) => {
-    const { user } = req.session;
-    if (user) {
-      res.locals.user = user;
-    }
-    next();
-  });
 
 
 app.use('/',viewsRouter)

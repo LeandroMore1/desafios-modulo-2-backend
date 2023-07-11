@@ -3,8 +3,12 @@ import local  from "passport-local";
 import GitHubStrategy from 'passport-github2';
 import { userService } from "../services/user.service.js";
 import { comparePassword , hashPassword } from "../utils/encrypt.util.js";
+import { Strategy, ExtractJwt } from 'passport-jwt';
 
+const jwtStrategy = Strategy;
+const jwtExtract = ExtractJwt;
 const LocalStrategy = local.Strategy
+
 
 const inicializePassport = () => {
 
@@ -51,6 +55,7 @@ const inicializePassport = () => {
                     if(!user){
                         const newUser = {
                             name: profile._json.name,
+                            age:"",
                             lastName: "",
                             email: profile._json.email,
                             password: "",
@@ -91,8 +96,6 @@ const inicializePassport = () => {
 
                     if (!comparePassword(user,password)) return done(null,false, {message: 'invalid data'})
 
-                    
-
                     return done(null, user);
 
                 } catch(err){
@@ -101,6 +104,36 @@ const inicializePassport = () => {
             }
         )
     )
+
+ 
+
+	passport.use(
+		'jwt',
+		new jwtStrategy(
+			{
+				jwtFromRequest: jwtExtract.fromExtractors([cookieExtractor]),
+				secretOrKey: 'privateKey',
+			},
+			(payload, done) => {
+				done(null, payload);
+			}),
+		async (jwt_payload, done) => {
+			try {
+				return done(null, jwt_payload);
+			} catch (error) {
+				done(error);
+			}
+		}
+	);
+
 }
+
+const cookieExtractor = (req) => {
+    let token = null;
+    if (req && req.cookies) {
+        token = req.cookies['token'];
+    }
+    return token;
+};
 
 export default inicializePassport

@@ -8,18 +8,20 @@ import { isAuth, isGuest } from "../middlewares/auth.middleware.js";
 
 const router = Router()
 
-router.get('/login',isGuest ,(req,res)=>{
+router.get('/login',(req,res)=>{
     res.render('login', {title: "Iniciar Sesión"})
 })
 
-router.get('/profile', isAuth, async (req,res)=>{
-    const { user } = req.session
-    delete user.password
+router.get('/profile',  async (req,res)=>{
+    const  getUser = req.user
+    const user = await userService.getUserByEmail(getUser.email)
+
     res.render('profile', 	{title: `Mi Perfil | ${user.name}`,
-    user})
+    user: user})
+    
 })
 
-router.get('/register', isGuest,(req,res)=>{
+router.get('/register',(req,res)=>{
     res.render('register', {title: "Registrarse"})
 })
 
@@ -28,8 +30,9 @@ router.get('/register', isGuest,(req,res)=>{
 
 
 router.get("/",async(req,res)=>{
+
     const products = await productService.getProducts()
-    res.render('home',{products})
+    res.render('home',{products })
 })
 
 

@@ -36,7 +36,7 @@ class UserService {
     }
 
     async getUserByEmail(mail){
-        return await this.model.findOne( {email: mail})
+        return await this.model.findOne( {email: mail}).lean()
     }
 
 }
